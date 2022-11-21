@@ -1,7 +1,56 @@
+*{
+    font-family: 'Gochi Hand', 'Handlee', 'Patrick Hand', cursive;
+    font-size: 1.2em;
+    color: rgb(58, 58, 143);
+}
+
 body {
     background-color: rgb(85, 61, 29);
 }
 
 main {
     background-color: rgb(245, 244, 244);
+    width: 80%;
+    margin: auto;
+    margin-top: 5%;
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+.list-item, .criar-item {
+    margin: 10px 10px 0px 10px;
+    border-bottom: 2px dotted rgb(151, 108, 51);
+    text-align: justify;
+    font-weight: 400;
+}
+
+.criar-item {
+    margin-top: 0px;
+    padding-bottom: 0px;
+}
+
+#descrever-item, #btn-criar-item {
+    border: none;
+    background-color: rgba(245, 244, 244, 0);
+    margin: 0;
+    margin-top: 5px;
+}
+
+#descrever-item {
+    width: 82%;
+    outline: none;
+    padding: 0px;
+    padding-left: 25px;
+    font-size: 1em;
+}
+
+#btn-criar-item {
+    width: 15%;
+    font-weight: bolder;
+    font-size: 1.2em;
+    padding: 0px;
 }

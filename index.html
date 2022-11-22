@@ -18,10 +18,10 @@
     <main>
 
         <div>
-            <h2 id="data-da-lista">Data de hoje</h2>
+            <h2 id="data-da-lista"></h2>
         </div>
 
-        <div>
+        <div id="lista-de-tarefas">
             <div class="list-item">
                 <input type="checkbox" name="teste01" id="teste01">
                 <label for="teste01" class="lbl-list-item">Teste 01</label>
@@ -38,7 +38,7 @@
         
         <div class="criar-item">
             <input type="text" name="" id="descrever-item" placeholder="Novo item">
-            <input type="button" value="CRIAR" id="btn-criar-item">
+            <input type="button" value="CRIAR" id="btn-criar-item" onclick="criarItem()">
         </div>
 
     </main>

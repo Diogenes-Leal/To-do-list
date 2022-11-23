@@ -5,7 +5,7 @@
 
 ## Funcionalidades
     1. Principais
-        [ ] Criar um novo item
+        [X] Criar um novo item
         [ ] Marcar o item como resolvido
         [ ] Deletar item já criado
         [ ] Alterar item já criado
@@ -18,3 +18,4 @@
     3. Terciario
         [ ] Limpar arquivo JSON depois que tiver 7 entradas
         [ ] Quando marcar um item como feito, passar uma linha sobre o item
+

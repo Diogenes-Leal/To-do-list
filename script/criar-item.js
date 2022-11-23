@@ -1,3 +1,5 @@
+//import { marcarComoFeito } from "./marcar-como-feito.js";
+
 // Pegar todos os elementos que estão no HTML necessários para executar a função
 const listaDeTarefas = document.getElementById('lista-de-tarefas');
 const textDescricaoItem = document.getElementById('descrever-item');
@@ -15,6 +17,10 @@ function criarItem(){
         const novoLabel = document.createElement('label');
         
         novaDiv.className = classeDaDiv;
+        //novaDiv.onclick = marcarComoFeito(novaDiv);
+        novaDiv.onclick = () => {
+            novaDiv.children[0].checked = !novaDiv.children[0].checked;
+        }
 
         novoCheck.type = 'checkbox';
         novoCheck.name = descricaoItem;

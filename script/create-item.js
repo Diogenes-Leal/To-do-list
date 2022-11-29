@@ -1,11 +1,10 @@
-//import { setCheck } from "./set-check.js";
+// import { setCheck } from './modules/set-check.js';
 
 // Pegar todos os elementos que estão no HTML necessários para executar a função
 const taskList = document.getElementById('list-tasks-section');
 const textItemDescription = document.getElementById('item-description');
 const divClass = 'list-item';
-const labelClass = 'lbl-list-item'
-
+const labelClass = 'lbl-list-item';
 
 function createTask(){
     // Elementos para colocar na lista de tarefa
@@ -17,11 +16,11 @@ function createTask(){
         const newLabel = document.createElement('label');
         
         newDiv.className = divClass;
-        //newDiv.onclick = marcarComoFeito(newDiv);
+        // newDiv.onclick = setCheck(newDiv);
         newDiv.onclick = () => {
             newDiv.children[0].checked = !newDiv.children[0].checked;
         }
-
+        
         newCheck.type = 'checkbox';
         newCheck.name = itemDescription;
         newCheck.id = itemDescription;

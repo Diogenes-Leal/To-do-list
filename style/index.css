@@ -1,11 +1,11 @@
 *{
     font-family: 'Gochi Hand', 'Handlee', 'Patrick Hand', cursive;
     font-size: 1.2em;
-    color: rgb(58, 58, 143);
 }
 
 body {
     background-color: rgb(85, 61, 29);
+    color: rgb(58, 58, 143);
 }
 
 main {
@@ -21,20 +21,21 @@ h2 {
     font-size: 2em;
 }
 
-.list-item, .create-item {
+.list-item, .create-item-section {
     margin: 10px 10px 0px 10px;
     border-bottom: 2px dotted rgb(151, 108, 51);
     text-align: justify;
     font-weight: 400;
 }
 
-.create-item {
+.create-item-section {
     margin-top: 0px;
     padding-bottom: 0px;
 }
 
 #item-description, #btn-create-item {
     border: none;
+    color: rgb(58, 58, 143);
     background-color: rgba(245, 244, 244, 0);
     margin: 0;
     margin-top: 5px;

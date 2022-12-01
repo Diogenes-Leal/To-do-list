@@ -36,7 +36,7 @@ h2 {
 
 .edit-remove-item {
     color: rgb(119, 119, 119);
-    display: none;
+    display: contents;
 }
 
 .create-item-section {

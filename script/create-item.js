@@ -30,9 +30,16 @@ function createTask(){
 
         newEdit.className = 'fa fa-pencil';
         newEdit.ariaHidden = 'true';
+        newEdit.onclick = () => {
+            console.log('Editar');
+        }
 
         newDelete.className = 'fa fa-eraser';
         newDelete.ariaHidden = 'true';
+        newDelete.onclick = () => {
+            const divParent = newDiv.parentElement;
+            divParent.removeChild(newDiv);
+        }
 
         newDivEditDelete.className = 'edit-remove-item';
         newDivEditDelete.appendChild(newEdit);

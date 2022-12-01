@@ -15,6 +15,7 @@ main {
     margin-top: 5%;
     text-align: center;
     padding: 20px;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.301);
 }
 
 h2 {
@@ -26,6 +27,16 @@ h2 {
     border-bottom: 2px dotted rgb(151, 108, 51);
     text-align: justify;
     font-weight: 400;
+}
+
+.lbl-list-item {
+    display: flexbox;
+    margin: 0 10px;
+}
+
+.edit-remove-item {
+    color: rgb(119, 119, 119);
+    display: none;
 }
 
 .create-item-section {

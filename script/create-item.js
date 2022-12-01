@@ -14,12 +14,11 @@ function createTask(){
         const newDiv = document.createElement('div');
         const newCheck = document.createElement('input');
         const newLabel = document.createElement('label');
+        const newEdit = document.createElement('i');
+        const newDelete = document.createElement('i');
+        const newDivEditDelete = document.createElement('div');
         
         newDiv.className = divClass;
-        // newDiv.onclick = setCheck(newDiv);
-        newDiv.onclick = () => {
-            newDiv.children[0].checked = !newDiv.children[0].checked;
-        }
         
         newCheck.type = 'checkbox';
         newCheck.name = itemDescription;
@@ -28,9 +27,31 @@ function createTask(){
         newLabel.htmlFor = itemDescription;
         newLabel.className = labelClass;
         newLabel.appendChild(document.createTextNode(itemDescription));
+
+        newEdit.className = 'fa fa-pencil';
+        newEdit.ariaHidden = 'true';
+
+        newDelete.className = 'fa fa-eraser';
+        newDelete.ariaHidden = 'true';
+
+        newDivEditDelete.className = 'edit-remove-item';
+        newDivEditDelete.appendChild(newEdit);
+        newDivEditDelete.appendChild(newDelete);
         
         newDiv.appendChild(newCheck);
         newDiv.appendChild(newLabel);
+        newDiv.appendChild(newDivEditDelete);
+
+        // newDiv.onclick = setCheck(newDiv);
+        newDiv.onclick = () => {
+            newDiv.children[0].checked = !newDiv.children[0].checked;
+        }
+        newDiv.onmouseover = () => {
+            newDiv.children[2].style.display = 'contents';
+        }
+        newDiv.onmouseout = () => {
+            newDiv.children[2].style.display = 'none';
+        }
         
         taskList.appendChild(newDiv);
         resetInputItemDescription();

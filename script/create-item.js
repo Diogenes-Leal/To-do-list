@@ -1,4 +1,4 @@
-// import { setCheck } from './modules/set-check.js';
+import { setCheck } from './modules/set-check.js';
 
 // Pegar todos os elementos que estão no HTML necessários para executar a função
 const taskList = document.getElementById('list-tasks-section');
@@ -16,10 +16,7 @@ function createTask(){
         const newLabel = document.createElement('label');
         
         newDiv.className = divClass;
-        // newDiv.onclick = setCheck(newDiv);
-        newDiv.onclick = () => {
-            newDiv.children[0].checked = !newDiv.children[0].checked;
-        }
+        newDiv.onclick = setCheck(newDiv);
         
         newCheck.type = 'checkbox';
         newCheck.name = itemDescription;

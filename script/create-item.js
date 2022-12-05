@@ -1,10 +1,10 @@
-// import { setCheck } from './modules/set-check.js';
-
 // Pegar todos os elementos que estão no HTML necessários para executar a função
 const taskList = document.getElementById('list-tasks-section');
 const textItemDescription = document.getElementById('item-description');
 const divClass = 'list-item';
 const labelClass = 'lbl-list-item';
+
+var mouseOver = false;
 
 function createTask(){
     // Elementos para colocar na lista de tarefa
@@ -31,8 +31,11 @@ function createTask(){
         newEdit.className = 'fa fa-pencil';
         newEdit.ariaHidden = 'true';
         newEdit.onclick = () => {
+            // Vai editar o texto do item
             console.log('Editar');
         }
+        newEdit.onmouseover = setMouseOver;
+        newEdit.onmouseleave = setMouseOver;
 
         newDelete.className = 'fa fa-eraser';
         newDelete.ariaHidden = 'true';
@@ -40,6 +43,8 @@ function createTask(){
             const divParent = newDiv.parentElement;
             divParent.removeChild(newDiv);
         }
+        newDelete.onmouseover = setMouseOver;
+        newDelete.onmouseleave = setMouseOver;
 
         newDivEditDelete.className = 'edit-remove-item';
         newDivEditDelete.appendChild(newEdit);
@@ -49,9 +54,8 @@ function createTask(){
         newDiv.appendChild(newLabel);
         newDiv.appendChild(newDivEditDelete);
 
-        // newDiv.onclick = setCheck(newDiv);
         newDiv.onclick = () => {
-            newDiv.children[0].checked = !newDiv.children[0].checked;
+            if (!mouseOver) newDiv.children[0].checked = !newDiv.children[0].checked;
         }
         newDiv.onmouseover = () => {
             newDiv.children[2].style.display = 'contents';
@@ -67,4 +71,8 @@ function createTask(){
 
 function resetInputItemDescription(){
     textItemDescription.value = '';
+}
+
+function setMouseOver() {
+    mouseOver = !mouseOver;
 }

@@ -5,8 +5,8 @@
 
 ## Funcionalidades
     1. Principais
-        - [x] Criar um novo item
-        - [x] Marcar o item como resolvido
-        - [ ] Deletar item já criado
+        - [X] Criar um novo item
+        - [X] Marcar o item como resolvido
+        - [X] Deletar item já criado
         - [ ] Alterar item já criado
         - [ ] Quando marcar um item como feito, passar uma linha sobre o item

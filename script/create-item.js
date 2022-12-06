@@ -6,7 +6,7 @@ const textItemDescription = document.getElementById('item-description');
 const divClass = 'list-item';
 const labelClass = 'lbl-list-item';
 
-function createTask(){
+export function createTask(){
     // Elementos para colocar na lista de tarefa
     const itemDescription = textItemDescription.value != '' ? textItemDescription.value:null;
 
@@ -16,7 +16,7 @@ function createTask(){
         const newLabel = document.createElement('label');
         
         newDiv.className = divClass;
-        newDiv.onclick = setCheck(newDiv);
+        newDiv.onclick = () => setCheck(newDiv);
         
         newCheck.type = 'checkbox';
         newCheck.name = itemDescription;

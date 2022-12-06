@@ -38,12 +38,18 @@
         
         <div class="create-item-section">
             <input type="text" name="" id="item-description" placeholder="Novo item">
-            <input type="button" value="CRIAR" id="btn-create-item" onclick="createTask()">
+            <input type="button" value="CRIAR" id="btn-create-item">
         </div>
 
     </main>
 
-    <script src="./script/today-date.js"></script>
-    <script type="module" src="./script/create-item.js"></script>
+    <script type="module">
+        import './script/today-date.js'
+        import { createTask } from './script/create-item.js'
+
+        const $BtnCreateItem = document.querySelector('#btn-create-item')
+
+        $BtnCreateItem.addEventListener('click', createTask)
+    </script>
 </body>
 </html>

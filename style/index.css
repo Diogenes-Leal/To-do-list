@@ -34,9 +34,13 @@ h2 {
     margin: 0 10px;
 }
 
-.edit-remove-item {
+.edit-remove-item, .confirm-decline-edit-item {
     color: rgb(119, 119, 119);
     display: contents;
+}
+
+i {
+    margin-left: 20px;
 }
 
 .create-item-section {

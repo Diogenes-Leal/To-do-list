@@ -28,8 +28,7 @@ function createTask(){
         newLabel.className = labelClass;
         newLabel.appendChild(document.createTextNode(itemDescription));
 
-        newEdit.className = 'fa fa-pencil';
-        newEdit.ariaHidden = 'true';
+        createAnIcon(newEdit, 'fa fa-pencil');
         newEdit.onclick = () => {
             // Vai editar o texto do item
             console.log('Editar');
@@ -37,8 +36,8 @@ function createTask(){
         newEdit.onmouseover = setMouseOver;
         newEdit.onmouseleave = setMouseOver;
 
+        createAnIcon(newDelete, 'fa fa-eraser');
         newDelete.className = 'fa fa-eraser';
-        newDelete.ariaHidden = 'true';
         newDelete.onclick = () => {
             const divParent = newDiv.parentElement;
             divParent.removeChild(newDiv);
@@ -75,4 +74,33 @@ function resetInputItemDescription(){
 
 function setMouseOver() {
     mouseOver = !mouseOver;
+}
+
+function createAnIcon(iconElement, className){
+    iconElement.className = className;
+    iconElement.ariaHidden = 'true';
+}
+
+function editTask(tag) {
+
+    console.log(tag.parentElement);
+    console.log(tag.parentElement.parentElement);
+
+    /*
+    const newInputText = document.createElement('input');
+    const newDivConfirmDecline = document.createElement('div');
+    const newConfirm = document.createElement('i');
+    const newDecline = document.createElement('i');
+
+    newInputText.type = 'text';
+    newInputText.className = 'edit-item-description';
+
+    newDivConfirmDecline.className = 'confirm-decline-edit-item';
+
+    createAnIcon(newConfirm, 'fa fa-check');
+    createAnIcon(newDecline, 'fa fa-times');
+
+    newDivConfirmDecline.appendChild(newConfirm);
+    newDivConfirmDecline.appendChild(newDecline);
+    */
 }

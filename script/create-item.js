@@ -15,7 +15,7 @@ function createTask(){
         const newTask = document.createElement('div');
         const idForNewCheckbox = `(${id})_${itemDescription}`
         id++;
-        
+
         newTask.className = divClass;
         newTask.innerHTML = `
             <input type="checkbox" name="${itemDescription}" id="${idForNewCheckbox}">
@@ -50,9 +50,12 @@ function setMouseOver() {
 }
 
 function deleteTask(e){
-    const taskDiv = e.parentElement.parentElement;
-    const divParent = taskDiv.parentElement;
-    divParent.removeChild(taskDiv);
+    const taskText = e.parentElement.parentElement.children[1].innerText;
+    if(confirm(`Deseja deletar "${taskText}"`)){
+        const taskDiv = e.parentElement.parentElement;
+        const divParent = taskDiv.parentElement;
+        divParent.removeChild(taskDiv);
+    }
 }
 
 function createAnIcon(iconElement, className){

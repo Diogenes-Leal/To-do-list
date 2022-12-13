@@ -36,7 +36,7 @@ h2 {
 
 .edit-remove-item, .confirm-decline-edit-item {
     color: rgb(119, 119, 119);
-    display: contents;
+    display: none;
 }
 
 i {

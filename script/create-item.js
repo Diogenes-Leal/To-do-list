@@ -6,6 +6,7 @@ const labelClass = 'lbl-list-item';
 
 var mouseOver = false;
 var id = 0;
+var editedTaskDescription = "";
 
 function createTask(){
     // Elementos para colocar na lista de tarefa
@@ -19,9 +20,8 @@ function createTask(){
         newTask.className = divClass;
         newTask.innerHTML = `
             <input type="checkbox" name="${itemDescription}" id="${idForNewCheckbox}">
-            <label for="${idForNewCheckbox}" class="lbl-list-item">${itemDescription}</label>
+            <label class="lbl-list-item" contenteditable onmouseover="setMouseOver()" onmouseleave="setMouseOver()" oninput="editTask(this)" onblur="checkTaskDescription(this)">${itemDescription}</label>
             <div class="edit-remove-item">
-                <i class="fa fa-pencil" aria-hidden="true" onmouseover="setMouseOver()" onmouseleave="setMouseOver()"></i>
                 <i class="fa fa-eraser" aria-hidden="true" onmouseover="setMouseOver()" onmouseleave="setMouseOver()" onclick="deleteTask(this)"></i>
             </div>
         `;
@@ -51,6 +51,7 @@ function setMouseOver() {
 
 function deleteTask(e){
     const taskText = e.parentElement.parentElement.children[1].innerText;
+
     if(confirm(`Deseja deletar "${taskText}"`)){
         const taskDiv = e.parentElement.parentElement;
         const divParent = taskDiv.parentElement;
@@ -64,25 +65,14 @@ function createAnIcon(iconElement, className){
 }
 
 function editTask(tag) {
+    editedTaskDescription = tag.innerHTML;
 
-    console.log(tag.parentElement);
-    console.log(tag.parentElement.parentElement);
+    if(tag.innerHTML.indexOf("<br>") != -1){
+        editedTaskDescription = tag.innerHTML = tag.innerHTML.replace("<br>", "");
+        tag.blur();
+    }
+}
 
-    /*
-    const newInputText = document.createElement('input');
-    const newDivConfirmDecline = document.createElement('div');
-    const newConfirm = document.createElement('i');
-    const newDecline = document.createElement('i');
-
-    newInputText.type = 'text';
-    newInputText.className = 'edit-item-description';
-
-    newDivConfirmDecline.className = 'confirm-decline-edit-item';
-
-    createAnIcon(newConfirm, 'fa fa-check');
-    createAnIcon(newDecline, 'fa fa-times');
-
-    newDivConfirmDecline.appendChild(newConfirm);
-    newDivConfirmDecline.appendChild(newDecline);
-    */
+function checkTaskDescription(tag){
+    console.log(tag.innerHTML.search(/ /))
 }

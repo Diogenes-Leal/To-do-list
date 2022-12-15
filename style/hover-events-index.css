@@ -1,4 +1,8 @@
-.list-item:hover, #btn-create-item:hover , .lbl-list-item:hover, .fa:hover{
+.list-item:hover, #btn-create-item:hover , .fa:hover{
     cursor: pointer;
     color: black;
+}
+
+.lbl-list-item:hover {
+    cursor: text;
 }

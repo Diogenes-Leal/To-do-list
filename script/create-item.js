@@ -7,6 +7,7 @@ const labelClass = 'lbl-list-item';
 var mouseOver = false;
 var id = 0;
 var editedTaskDescription = "";
+var focusTaskDescription = "";
 
 function createTask(){
     // Elementos para colocar na lista de tarefa
@@ -20,20 +21,25 @@ function createTask(){
         newTask.className = divClass;
         newTask.innerHTML = `
             <input type="checkbox" name="${itemDescription}" id="${idForNewCheckbox}">
-            <label class="lbl-list-item" contenteditable onmouseover="setMouseOver()" onmouseleave="setMouseOver()" oninput="editTask(this)" onblur="checkTaskDescription(this)">${itemDescription}</label>
+            <label class="lbl-list-item" contenteditable onmouseover="setMouseOver()" onmouseleave="setMouseOver()" onfocus="setFocusTaskDescription(this)" oninput="editTask(this)" onblur="checkTaskDescription(this)">${itemDescription}</label>
             <div class="edit-remove-item">
                 <i class="fa fa-eraser" aria-hidden="true" onmouseover="setMouseOver()" onmouseleave="setMouseOver()" onclick="deleteTask(this)"></i>
             </div>
         `;
 
         newTask.onclick = () => {
-            if (!mouseOver) newTask.children[0].checked = !newTask.children[0].checked;
+            if (!mouseOver) {
+                newTask.children[0].checked = !newTask.children[0].checked;
+                newTask.children[1].style.textDecoration = newTask.children[0].checked ? "line-through 0.1em":"none";
+            }
         }
         newTask.onmouseover = () => {
             newTask.children[2].style.display = 'contents';
+            newTask.children[1].style.whiteSpace = 'pre-wrap';
         }
         newTask.onmouseout = () => {
             newTask.children[2].style.display = 'none';
+            newTask.children[1].style.whiteSpace = 'nowrap';
         }
 
         taskList.appendChild(newTask);
@@ -64,6 +70,10 @@ function createAnIcon(iconElement, className){
     iconElement.ariaHidden = 'true';
 }
 
+function setFocusTaskDescription(tag) {
+    focusTaskDescription = tag.innerHTML;
+}
+
 function editTask(tag) {
     editedTaskDescription = tag.innerHTML;
 
@@ -73,6 +83,14 @@ function editTask(tag) {
     }
 }
 
-function checkTaskDescription(tag){
-    console.log(tag.innerHTML.search(/ /))
+function checkTaskDescription(tag){ 
+    if(tag.innerHTML.search(/\w/) != 0){
+        if(confirm(`A tarefa "${focusTaskDescription}" agora está vazia, deseja deleta-la?`)){
+            const taskDiv = tag.parentElement;
+            const divParent = taskDiv.parentElement;
+            divParent.removeChild(taskDiv);
+        } else {
+            tag.innerHTML = focusTaskDescription;
+        }
+    }
 }

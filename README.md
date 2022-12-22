@@ -1,7 +1,7 @@
 # Projeto To-do list
 
 ## Objective (Objetivo)
-    Criar uma lista de afazeres diario.
+    Create a to-do list for daily task (Criar uma lista de afazeres diario).
 
 
 ## Functions (Funcionalidades)

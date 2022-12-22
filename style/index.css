@@ -26,17 +26,23 @@ h2 {
     margin: 10px 10px 0px 10px;
     border-bottom: 2px dotted rgb(151, 108, 51);
     text-align: justify;
+    white-space: nowrap;
     font-weight: 400;
 }
 
 .lbl-list-item {
-    display: flexbox;
     margin: 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: hyphenate;
+    max-width: 80%;
+    display: inline-block;
 }
 
 .edit-remove-item, .confirm-decline-edit-item {
     color: rgb(119, 119, 119);
-    display: contents;
+    display: none;
 }
 
 i {

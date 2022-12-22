@@ -5,65 +5,44 @@ const divClass = 'list-item';
 const labelClass = 'lbl-list-item';
 
 var mouseOver = false;
+var id = 0;
+var editedTaskDescription = "";
+var focusTaskDescription = "";
 
 function createTask(){
     // Elementos para colocar na lista de tarefa
     const itemDescription = textItemDescription.value != '' ? textItemDescription.value:null;
 
     if(itemDescription != null){
-        const newDiv = document.createElement('div');
-        const newCheck = document.createElement('input');
-        const newLabel = document.createElement('label');
-        const newEdit = document.createElement('i');
-        const newDelete = document.createElement('i');
-        const newDivEditDelete = document.createElement('div');
-        
-        newDiv.className = divClass;
-        
-        newCheck.type = 'checkbox';
-        newCheck.name = itemDescription;
-        newCheck.id = itemDescription;
-        
-        newLabel.htmlFor = itemDescription;
-        newLabel.className = labelClass;
-        newLabel.appendChild(document.createTextNode(itemDescription));
+        const newTask = document.createElement('div');
+        const idForNewCheckbox = `(${id})_${itemDescription}`
+        id++;
 
-        createAnIcon(newEdit, 'fa fa-pencil');
-        newEdit.onclick = () => {
-            // Vai editar o texto do item
-            console.log('Editar');
-        }
-        newEdit.onmouseover = setMouseOver;
-        newEdit.onmouseleave = setMouseOver;
+        newTask.className = divClass;
+        newTask.innerHTML = `
+            <input type="checkbox" name="${itemDescription}" id="${idForNewCheckbox}">
+            <label class="lbl-list-item" contenteditable onmouseover="setMouseOver()" onmouseleave="setMouseOver()" onfocus="setFocusTaskDescription(this)" oninput="editTask(this)" onblur="checkTaskDescription(this)">${itemDescription}</label>
+            <div class="edit-remove-item">
+                <i class="fa fa-eraser" aria-hidden="true" onmouseover="setMouseOver()" onmouseleave="setMouseOver()" onclick="deleteTask(this)"></i>
+            </div>
+        `;
 
-        createAnIcon(newDelete, 'fa fa-eraser');
-        newDelete.className = 'fa fa-eraser';
-        newDelete.onclick = () => {
-            const divParent = newDiv.parentElement;
-            divParent.removeChild(newDiv);
+        newTask.onclick = () => {
+            if (!mouseOver) {
+                newTask.children[0].checked = !newTask.children[0].checked;
+                newTask.children[1].style.textDecoration = newTask.children[0].checked ? "line-through 0.1em":"none";
+            }
         }
-        newDelete.onmouseover = setMouseOver;
-        newDelete.onmouseleave = setMouseOver;
+        newTask.onmouseover = () => {
+            newTask.children[2].style.display = 'contents';
+            newTask.children[1].style.whiteSpace = 'pre-wrap';
+        }
+        newTask.onmouseout = () => {
+            newTask.children[2].style.display = 'none';
+            newTask.children[1].style.whiteSpace = 'nowrap';
+        }
 
-        newDivEditDelete.className = 'edit-remove-item';
-        newDivEditDelete.appendChild(newEdit);
-        newDivEditDelete.appendChild(newDelete);
-        
-        newDiv.appendChild(newCheck);
-        newDiv.appendChild(newLabel);
-        newDiv.appendChild(newDivEditDelete);
-
-        newDiv.onclick = () => {
-            if (!mouseOver) newDiv.children[0].checked = !newDiv.children[0].checked;
-        }
-        newDiv.onmouseover = () => {
-            newDiv.children[2].style.display = 'contents';
-        }
-        newDiv.onmouseout = () => {
-            newDiv.children[2].style.display = 'none';
-        }
-        
-        taskList.appendChild(newDiv);
+        taskList.appendChild(newTask);
         resetInputItemDescription();
     }
 }
@@ -76,31 +55,42 @@ function setMouseOver() {
     mouseOver = !mouseOver;
 }
 
+function deleteTask(e){
+    const taskText = e.parentElement.parentElement.children[1].innerText;
+
+    if(confirm(`Deseja deletar "${taskText}"`)){
+        const taskDiv = e.parentElement.parentElement;
+        const divParent = taskDiv.parentElement;
+        divParent.removeChild(taskDiv);
+    }
+}
+
 function createAnIcon(iconElement, className){
     iconElement.className = className;
     iconElement.ariaHidden = 'true';
 }
 
+function setFocusTaskDescription(tag) {
+    focusTaskDescription = tag.innerHTML;
+}
+
 function editTask(tag) {
+    editedTaskDescription = tag.innerHTML;
 
-    console.log(tag.parentElement);
-    console.log(tag.parentElement.parentElement);
+    if(tag.innerHTML.indexOf("<br>") != -1){
+        editedTaskDescription = tag.innerHTML = tag.innerHTML.replace("<br>", "");
+        tag.blur();
+    }
+}
 
-    /*
-    const newInputText = document.createElement('input');
-    const newDivConfirmDecline = document.createElement('div');
-    const newConfirm = document.createElement('i');
-    const newDecline = document.createElement('i');
-
-    newInputText.type = 'text';
-    newInputText.className = 'edit-item-description';
-
-    newDivConfirmDecline.className = 'confirm-decline-edit-item';
-
-    createAnIcon(newConfirm, 'fa fa-check');
-    createAnIcon(newDecline, 'fa fa-times');
-
-    newDivConfirmDecline.appendChild(newConfirm);
-    newDivConfirmDecline.appendChild(newDecline);
-    */
+function checkTaskDescription(tag){ 
+    if(tag.innerHTML.search(/\w/) != 0){
+        if(confirm(`A tarefa "${focusTaskDescription}" agora está vazia, deseja deleta-la?`)){
+            const taskDiv = tag.parentElement;
+            const divParent = taskDiv.parentElement;
+            divParent.removeChild(taskDiv);
+        } else {
+            tag.innerHTML = focusTaskDescription;
+        }
+    }
 }
